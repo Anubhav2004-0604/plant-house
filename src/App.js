@@ -1,25 +1,24 @@
-import logo from './logo.svg';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Login from './Components/Login';
+import UserRoleBasedRender from './Components/UserRoleBasedRender';
+import Home from './Components/Home';
+import Profile from './Components/Profile';
+import ContactUs from './Components/ContactUs';
+import PrivateRoute from './Components/PrivateRoute';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => (
+    <Router>
+      <Routes>
+        <Route path="/plant-house" element={<Login />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/profile" element={<PrivateRoute> <Profile /> </PrivateRoute>} />
+        <Route path="/contactus" element={<PrivateRoute> <ContactUs /> </PrivateRoute>} />
+        <Route path="/product/:id" element={<PrivateRoute> <UserRoleBasedRender /> </PrivateRoute>} />
+        <Route path="/home" element={<PrivateRoute> <Home /> </PrivateRoute>} />
+      </Routes>
+    </Router>
+);
 
 export default App;
